@@ -75,3 +75,133 @@ double	0.0d<br>
 但是上面说的不适用于 局部变量，局部作用域中不初始化会报错。
 
 ## 2.5 方法、参数和返回值
+介绍了方法的组成
+```
+ReturnType methodName (/* Argument list */){
+    /* Method body */
+}
+```
+#### 2.5.1 参数列表
+方法的参数有强类型控制 如果是String 类型 则必须传String 对象 否则报错。
+
+## 2.6 构建一个Java程序
+#### 2.6.1 名字可见性
+Java 为了保证命名唯一，采用了反转域名的规范建立包名，例如 net.mindview
+.my.project.
+#### 2.6.2 运用其他构件
+引用包写法
+```
+import java.util.*;
+```
+#### 2.6.3 static 关键字
+1. static 修饰的变量是共享内存的
+2. static 字段对每个类来说都只有一份存储空间，而非static对象则是每个对象都有一个存储空间。
+3. static 好处是不创建任何对象就能调用它，这一点对定义main()入口文件很重要。
+
+## 2.7 你的第一个Java程序
+在每个程序文件的开头，都必须放置一个import语句
+```
+import java.util.*;
+public class HelloDate {
+    public static void main(String[] args) {
+        System.out.println("Hello, it's: ");
+        System.out.println(new Date());
+    }
+}
+
+```
+main()的形式是固定的，如上
+
+虽然并为用到 args，但是Java编译器必须要这样做，因为 args 要用来存储命令行参数
+（Java 最强大的优势之一就是它具有庞大的标准类库集）
+#### 2.7.1 编译和运行
+javac HelloDate.java <br>
+java HelloDate<br>
+注 ：**JDK11以后 不需要用javac 编译 直接java 编译+运行 （Java也在像轻量改变）** 
+
+## 2.8 注释和嵌入式文档
+Java里提供两种注释风格。
+
+第一种风格，注释以“/*”开始，随后是注释内容，并可跨越多行，最后以“*/”结束。<br>
+第二种风格，单行注释，以“//”开头，直到句末。
+#### 2.8.1 注释文档
+javadoc 将文件同文档链接起来。将注释提取出来放在一个文件内。javadoc输出的是一个HTML文件，可以用Web浏览器查看。
+#### 2.8.2 语法
+独立文档标签是一些以“@”字符开头的命令，且要置于注释行的最前面。
+所有的javadoc命令都只能在“/**”注释中出现，注释结束于“*/”。
+```
+/** A class comment */
+public class Documentation1 {
+    /** A field comment */
+    public int i;
+    /** A method comment */
+    public void f() {}
+}
+```
+**javadoc只能为public和protected成员进行文档注释。private和包内可访问成员的注释会被忽略掉。可以使用-private进行标记，可以将private成员的注释也包括在内。**
+#### 2.8.3 嵌入式HTML
+所有类型的注释文档都支持嵌入式HTML。
+#### 2.8.4 一些标签示例
+1. @see：引用其他类
+```
+/**
+ * @see classname
+ * @see fully-qualified-classname
+ * @see fully-qualified-classname#method-name
+ */
+```
+2. {@link package.class#member label} 该标签与@see极其相似，只是它用于行内，并且用“label”作为超链接文本。
+3. {@docRoot} 该标签产生到文档根目录的相对路径，用于文档树页面的显式超链接。
+4. {@inheritDoc}
+该标签从当前这个类的最直接的基类中继承相关文档到当前的文档注释中。
+5. @version 代码版本的相关信息
+6. @author 作者
+7. @since 指定程序最早使用的版本
+8. @param 参数
+9. @return 返回值
+10. @throws 产生异常的相关信息。
+11. @deprecated 新特性改进。
+#### 2.8.5 文档示例
+```
+//:first/HelloDate.java
+import java.util.Date;
+/**
+ *  The first Thinking in Java example program.
+ *  Displays a string and today's date.
+ * @author xjd
+ * @author www.xxx.com.cn
+ * @version 4.0
+ */
+public class HelloDate {
+    /**
+     *  Entry point to class & application
+     * @param args array of string arguments
+     * @throws exceptions No exceptions thrown
+     */
+    public static void main(String[] args) {
+        System.out.println("Hello, it's: ");
+        System.out.println(new Date());
+    }/* Output:(55% match)
+    Hello,it's:
+    Thu Jun 28 17:56:45 CST 2018
+    *///:~
+}
+```
+第一行 用一个“:”作为特殊几号说明这是包含原文件名的注释行。
+
+“///:~”标志源代码清单的结束。
+
+/*Output标签表示输出的开始部分将由这个文件生成，通过这种形式，它会自动地测试以验证其准确性。
+
+(55% match)在向测试系统说明程序的当前运行和醒一次运行的输出存在这很大差异，55%是两次输出与其的相关性程度。
+
+## 2.9 编码风格
+类名 首字母大写的**驼峰风格**
+```
+class AllTheColorsOfTheRainbow{
+    int anIntegerRepresentingColors;
+    void changeTheHueOfTheColor(int newHue) {}
+}
+```
+## 2.10 总结
+大家了解如何编写一个简单程序的Java编程知识，对Java语言及它的一些基本思想也有了一个总体认识。
